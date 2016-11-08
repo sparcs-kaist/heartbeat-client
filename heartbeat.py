@@ -16,7 +16,7 @@ try:
 except:
     NETWORK_REPORT = False
     SERVER_NAME = 'TEST'
-    SERVER_KEY = 'secretkey'
+    SERVER_KEY = 'secret_key'
     API_ENDPOINT = 'https://example.com/'
 
 
@@ -152,7 +152,7 @@ def report(info):
     for i in range(3):
         timestamp = int(time.time())
         try:
-            req = requests.post(API_ENDPOINT, data=json.dumps(payload))
+            req = requests.post(API_ENDPOINT, json=payload)
             if req.status_code == 200:
                 resp = req.json()
                 if 'success' in resp:
