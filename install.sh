@@ -1,4 +1,9 @@
-#!/bin/bash
+#!/bin/sh
+
+if [ $# -ne 2 ]; then
+    echo $0: usage: install.sh name key
+    exit 1
+fi
 
 ROOT_PATH="$(dirname $(readlink -f $0))/heartbeat"
 
@@ -10,6 +15,12 @@ ENV_PATH="$ROOT_PATH/env"
 
 . "$ENV_PATH/bin/activate"
 "$ENV_PATH/bin/pip" "install" "-r$ROOT_PATH/requirements.txt"
+
+SETTING_PATH="$ROOT_PATH/settings.py"
+echo "NETWORK_REPORT = True" >> "$SETTING_PATH"
+echo "SERVICE_NAME = $1" >> "$SETTING_PATH"
+echo "SERVICE_KEY = $2" >> "$SETTING_PATH"
+echo "API_ENDPOINT = https://example.com/" >> "$SETTING_PATH"
 
 crontab=/usr/bin/crontab
 ($crontab -l 2>/dev/null; echo "* * * * * . $ROOT_PATH/run.sh") | $crontab -
