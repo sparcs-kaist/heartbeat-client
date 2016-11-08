@@ -15,8 +15,8 @@ try:
     from settings import *
 except:
     NETWORK_REPORT = False
-    SERVICE_NAME = 'TEST'
-    SERVICE_KEY = 'secretkey'
+    SERVER_NAME = 'TEST'
+    SERVER_KEY = 'secretkey'
     API_ENDPOINT = 'https://example.com/'
 
 
@@ -142,8 +142,8 @@ def get_sys():
 def report(info):
     payload = {
         'server': {
-            'name': SERVICE_NAME,
-            'key': SERVICE_KEY,
+            'name': SERVER_NAME,
+            'key': SERVER_KEY,
         },
         'info': info,
         'errors': {},
@@ -192,7 +192,7 @@ def main():
 
     success, errors = report(info)
     if not success:
-        print('=ERROR ON HEARTBEAT CLIENT %s=' % SERVICE_NAME)
+        print('=ERROR ON HEARTBEAT CLIENT %s=' % SERVER_NAME)
         for k, v in errors.items():
             print('Time: %s, Reason: %s' %
                   (datetime.fromtimestamp(k).isoformat(), v))

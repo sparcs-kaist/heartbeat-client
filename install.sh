@@ -18,8 +18,8 @@ ENV_PATH="$ROOT_PATH/env"
 
 SETTING_PATH="$ROOT_PATH/settings.py"
 echo "NETWORK_REPORT = True" >> "$SETTING_PATH"
-echo "SERVICE_NAME = $1" >> "$SETTING_PATH"
-echo "SERVICE_KEY = $2" >> "$SETTING_PATH"
+echo "SERVER_NAME = $1" >> "$SETTING_PATH"
+echo "SERVER_KEY = $2" >> "$SETTING_PATH"
 echo "API_ENDPOINT = https://example.com/" >> "$SETTING_PATH"
 
 crontab=/usr/bin/crontab
