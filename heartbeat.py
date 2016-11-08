@@ -153,12 +153,14 @@ def report(info):
         timestamp = int(time.time())
         try:
             req = requests.post(API_ENDPOINT, data=json.dumps(payload))
-            resp = req.json()
-            if 'success' in resp:
-                return resp['success'], payload['errors']
-            else:
+            if req.status_code == 200:
+                resp = req.json()
+                if 'success' in resp:
+                    return resp['success'], payload['errors']
                 error = resp['error'] if 'error' in resp else 'unknown'
-                payload['errors'][timestamp] = error
+            else:
+                error = 'Server returned %d instead of 200' % req.status_code
+            payload['errors'][timestamp] = error
 
         except Exception as e:
             payload['errors'][timestamp] = str(e)
