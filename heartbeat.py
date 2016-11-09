@@ -44,7 +44,7 @@ def get_mem():
     info = {
         'virtual': {
             'total': virt_mem.total,
-            'available': virt_mem.available,
+            'avail': virt_mem.available,
             'used': virt_mem.used,
         },
         'swap': {
@@ -65,8 +65,8 @@ def get_disk():
     for disk in disk_list:
         usage = psutil.disk_usage(disk.mountpoint)
         info[disk.device] = {
-            'mountpoint': disk.mountpoint,
-            'fstype': disk.fstype,
+            'mount_point': disk.mountpoint,
+            'fs_type': disk.fstype,
             'total': usage.total,
             'used': usage.used,
         }
