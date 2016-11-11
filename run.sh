@@ -1,4 +1,4 @@
 #!/bin/bash
 
-source env/bin/activate
-python heartbeat.py
+. "env/bin/activate"
+python "heartbeat.py"
