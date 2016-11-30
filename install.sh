@@ -18,9 +18,9 @@ ENV_PATH="$ROOT_PATH/env"
 
 SETTING_PATH="$ROOT_PATH/settings.py"
 echo "NETWORK_REPORT = True" >> "$SETTING_PATH"
-echo "SERVER_NAME = $1" >> "$SETTING_PATH"
-echo "SERVER_KEY = $2" >> "$SETTING_PATH"
-echo "API_ENDPOINT = https://example.com/" >> "$SETTING_PATH"
+echo "SERVER_NAME = \"$1\"" >> "$SETTING_PATH"
+echo "SERVER_KEY = \"$2\"" >> "$SETTING_PATH"
+echo "API_ENDPOINT = https://status.sparcs.org/api/server/update/" >> "$SETTING_PATH"
 
 crontab=/usr/bin/crontab
 ($crontab -l 2>/dev/null; echo "*/2 * * * * cd $ROOT_PATH && ./run.sh") | $crontab -
