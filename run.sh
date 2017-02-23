@@ -1,4 +1,4 @@
 #!/bin/bash
 
-. "env/bin/activate"
+. "venv/bin/activate"
 python "heartbeat.py"
