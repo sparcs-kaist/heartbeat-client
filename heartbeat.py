@@ -106,12 +106,20 @@ def get_proc():
     proc_list = []
     for p in psutil.process_iter():
         try:
+            p.cpu_percent(interval=0)
+        except:
+            pass
+
+    time.sleep(1)
+
+    for p in psutil.process_iter():
+        try:
             if p.pid == self_pid:
                 continue
 
             proc_list.append({
                 'name': p.name(),
-                'cpu': p.cpu_percent(interval=0.1),
+                'cpu': p.cpu_percent(interval=0),
                 'mem': p.memory_percent(),
             })
         except:
@@ -190,6 +198,7 @@ def main():
 
     if not NETWORK_REPORT:
         pprint.pprint(info)
+        os.remove(LOCK)
         return
 
     success, errors = report(info)
